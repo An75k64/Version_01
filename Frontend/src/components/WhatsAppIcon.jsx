@@ -22,7 +22,7 @@ const WhatsAppIcon = () => {
       height="50px" // Ensure the Box height accommodates the Image
     >
       <Image
-        src="/src/assets/images/icons8-whatsapp-100.png"
+        src="/assets/images/icons8-whatsapp-100.png"
         alt="WhatsApp"
         boxSize="full"  // Ensures the image covers the Box dimensions
         objectFit="contain"  // Adjust this to 'contain' to avoid cropping
@@ -32,3 +32,4 @@ const WhatsAppIcon = () => {
 };
 
 export default WhatsAppIcon;
+
