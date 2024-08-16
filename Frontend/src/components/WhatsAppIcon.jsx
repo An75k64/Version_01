@@ -34,3 +34,4 @@ const WhatsAppIcon = () => {
 };
 
 export default WhatsAppIcon;
+
