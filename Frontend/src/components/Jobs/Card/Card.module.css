@@ -1,0 +1,91 @@
+.card{
+    height: 355px;
+    width: 290px;
+    padding: 5px;
+    border-radius: 15px;
+    border: 2px solid black;
+    box-shadow: 5px 5px 5px rgb(49, 49, 49);
+}
+.imgc{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 8px;
+    gap: 30px;
+    padding-bottom: 5px;
+}
+.dec{
+    display: grid;
+    justify-content:center;
+    align-items: start;
+    gap: 12px;
+    padding: 20px;
+}
+.img{
+    height: 90px;
+    width: 90px;
+    border-radius: 50px;
+}
+.head{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+}
+.p{
+  padding-left: 10px;
+}
+.location{
+    display: flex;
+}
+.btncon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 5px;
+}
+.btn{
+    background-color: rgb(10, 167, 10);
+    padding: 10px 15px;
+    border-radius: 15px;
+    gap: 5px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 600;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.abtn{
+    background-color: rgb(17, 130, 236);
+    border-radius: 15px;
+    color: white;
+    padding: 10px 15px;
+    font-weight: 600;
+}
+.wht{
+    background-color: transparent;
+    padding-right: 5px;
+    font-size: 20px;
+}
+.jdes{
+    background-color: rgb(226, 55, 112);
+    border-radius: 10px;
+    padding: 8px;
+    color: aliceblue;
+    cursor: pointer;
+}
+.cardlogo{
+    font-size: 20px;
+}
+@media only screen and (max-width: 480px) {
+    .card{
+        height: 355px;
+        width: 90%;
+        padding: 2px;
+        border-radius: 15px;
+    }
+   
+  }
