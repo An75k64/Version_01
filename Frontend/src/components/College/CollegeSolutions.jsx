@@ -10,13 +10,7 @@ const CollegeSolutions = () => {
       description:
         "Connect with numerous top-tier employers seamlessly through our extensive network, bringing a wide range of opportunities directly to you.",
     },
-    {
-      title: "Innovative Platform",
-      imageUrl:
-        "https://images.pexels.com/photos/7688336/pexels-photo-7688336.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-      description:
-        "Utilize advanced tools and features to streamline the recruitment process, making it more efficient and effective for both colleges and employers.",
-    },
+    
     {
       title: "Comprehensive Training",
       imageUrl:
@@ -25,12 +19,13 @@ const CollegeSolutions = () => {
         "Offer targeted training programs to bridge skill gaps and ensure graduates are prepared with industry-specific skills necessary for their careers.",
     },
     {
-      title: "Data-Driven Insights",
+      title: "Campus Branding",
       imageUrl:
-        "https://images.pexels.com/photos/5439433/pexels-photo-5439433.jpeg?auto=compress&cs=tinysrgb&w=600",
+        "https://images.pexels.com/photos/7688336/pexels-photo-7688336.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       description:
-        "Access valuable feedback and insights to enhance your career services and make data-informed decisions to improve recruitment strategies.",
+        "At TalentConnect, we develop detailed strategies to create a strong brand presence on campus, enhancing your visibility and reputation. Our expertise includes showcasing successful campus branding campaigns that have effectively engaged students. Let us help you build a compelling and memorable brand presence within academic communities.",
     },
+    
   ];
 
   return (

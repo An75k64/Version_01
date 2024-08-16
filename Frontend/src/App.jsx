@@ -10,7 +10,6 @@ import CurrentOpening from "./components/Jobs/Openings/Opening.jsx";
 import Employer from "./pages/Employer.jsx";
 import College from "./pages/College.jsx";
 import CampusToCubicle from "./pages/CampusToCubicle.jsx";
-import Affiliate from "./pages/Affiliate.jsx";
 import Contact from "./pages/Contact.jsx";
 import Header from "./components/Header/Header.jsx";
 import Footer from "./components/Footer.jsx";
@@ -22,7 +21,7 @@ import Seminar from "./components/Service/Seminar/Seminar.jsx";
 import Counselling from "./components/Service/Counselling/Counselling.jsx";
 import Workforce from "./components/Service/Workforce/Workforce.jsx";
 import CareerCraft from "./components/Service/CareerCraft/CareerCraft.jsx";
-import AffiliateForm from "./components/Affiliate/AffiliateForm.jsx";
+
 import WhatsAppIcon from "./components/WhatsAppIcon.jsx";  // Import the WhatsAppIcon component
 
 const NotFound = () => <div>Page Not Found</div>;
@@ -50,8 +49,6 @@ const App = () => {
           <Route path="/campus-to-cubicle" element={<CampusToCubicle />} />
           <Route path="/college-form" element={<CollegeForm />} />
           <Route path="/company-form" element={<CompanyForm />} />
-          <Route path="/affiliate" element={<Affiliate />} />
-          <Route path="/affiliate-form" element={<AffiliateForm />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

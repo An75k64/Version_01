@@ -4,6 +4,13 @@ import { Container, Stack, Heading, Box, Text, useBreakpointValue } from "@chakr
 const CCSection3 = () => {
   const cardData = [
     {
+      title: "1:1 Mentorship Program",
+      imageUrl:
+        "https://images.unsplash.com/photo-1653669486900-fd06730dcc78?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      description:
+        "Advance your career with personalized guidance from industry experts. Our 1:1 mentorship program is tailored to your goals, offering targeted support in high-demand technical skills and certification pathways. Achieve your potential with expert insights and strategies for success",
+    },
+    {
       title: "Skill Enhancement",
       imageUrl:
         "https://www.avanse.com/viewPagesAssets/img/skill-enhancement-loan.png",

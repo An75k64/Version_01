@@ -14,6 +14,7 @@ import Section4 from "./Section4";
 
 
 
+
 export default function OnCampus() {
    
   return (
@@ -100,6 +101,47 @@ export default function OnCampus() {
         </VStack>
       </Flex>
     
+      {/*EmployerBranding */}
+      <Flex
+        mt={135}
+        w={"full"}
+        h={"60vh"}
+        backgroundImage={
+          'url(https://images.unsplash.com/photo-1686771416282-3888ddaf249b?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)'
+        }
+        backgroundSize={"cover"}
+        backgroundPosition={"center center"}
+        backgroundAttachment={"fixed"} // This makes the background image stay in place
+        zIndex={1}
+        position="relative"
+      >
+        <VStack
+          w={"full"}
+          justify={"center"}
+          px={useBreakpointValue({ base: 4, md: 8 })}
+          bgGradient={"linear(to-r, transparent, blackAlpha.600)"}
+        >
+          <Stack maxW={"2xl"} spacing={6} position="absolute" right="8" >
+            <Box
+              bg="gray.100"
+              p={10}
+              borderRadius="md"
+              textAlign="left"
+              color="black"
+              maxW="lg"
+              minH="450px" // Increase the height of the box
+            >
+              <Heading fontFamily={"ClashDisplay"} fontSize={{ base: "2xl", md: "5xl" }} fontWeight="bold" color="blue.400">
+                Employer Branding
+              </Heading>
+              <Text mt={4} fontSize={{ base: "1x1", md: "2x1" }} color="gray.800">
+              Strengthen your company's reputation and attract top talent with a compelling employer branding strategy. Our page highlights the distinctive qualities that make your workplace exceptional, including your organizational culture, core values, and the unique opportunities you offer. Emphasize your commitment to employee growth, innovation, and a supportive work environment. Engage potential candidates by showcasing the benefits of working with you and how your company stands out in the competitive job market.
+              </Text>
+            </Box>
+          </Stack>
+        </VStack>
+      </Flex>
+       
 
       {/* Section 3 */}
         <Section3 />

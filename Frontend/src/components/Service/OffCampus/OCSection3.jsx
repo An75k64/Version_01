@@ -4,13 +4,6 @@ import { Container, Stack, Heading, Box, Text, useBreakpointValue } from "@chakr
 const OCSection3 = () => {
   const cardData = [
     {
-      title: "Virtual Interviews",
-      imageUrl:
-        "https://plus.unsplash.com/premium_photo-1666625102659-12565c311855?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OTd8fFZJUlRVQUwlMjBJTlRFUlZJRVdTfGVufDB8fDB8fHww",
-      description:
-        "Talentconnect offers seamless virtual interview capabilities, allowing job seekers to connect with employers from the comfort of their own homes.",
-    },
-    {
       title: "Recruitment fairs",
       imageUrl:
         "https://www.cubsucc.com/contentFiles/components/GDEventBooking/29/large/careersfairUCCedot.jpg",
@@ -25,14 +18,13 @@ const OCSection3 = () => {
         "Talentconnect’s comprehensive job portal connects employers with a vast pool of skilled candidates, enabling efficient off-campus hiring and matching.", 
     },
     {
-      title: "Employer Branding",
+      title: "Virtual Interviews",
       imageUrl:
-        "https://www.jobsoid.com/wp-content/uploads/2020/01/Employer-Branding.svg",
+        "https://plus.unsplash.com/premium_photo-1666625102659-12565c311855?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OTd8fFZJUlRVQUwlMjBJTlRFUlZJRVdTfGVufDB8fDB8fHww",
       description:
-        "We help companies strengthen their employer brand and reach passive job seekers through strategic digital and social media campaigns.",
+        "Talentconnect offers seamless virtual interview capabilities, allowing job seekers to connect with employers from the comfort of their own homes.",
     },
-
-
+    
   ];
 
   return (

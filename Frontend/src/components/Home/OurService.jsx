@@ -1,5 +1,3 @@
-
-
 import {
   Box,
   Button,
@@ -7,8 +5,8 @@ import {
   Flex,
   Heading,
   Icon,
-  Stack,
   Text,
+  Stack,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { ReactElement } from "react";
@@ -48,11 +46,13 @@ const Card = ({ heading, description, icon, link }) => {
             rounded={"full"}
             bg={useColorModeValue("gray.100", "gray.700")}
             mb={2}
+            as={Link}
+            to={link}
           >
             {icon}
           </Flex>
           <Box textAlign="center">
-            <Heading size="md" color="#7877e6ff">
+            <Heading size="md" color="#7877e6ff" as={Link} to={link}>
               {heading}
             </Heading>
             <Text mt={1} fontSize={"sm"} color={"gray.600"}>

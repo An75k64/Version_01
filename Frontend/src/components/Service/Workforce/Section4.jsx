@@ -53,7 +53,7 @@ const Section4 = () => {
           <Stack direction={{ base: "column", md: "row" }} spacing={4} mt={4}>
             <Button
               as={RouterLink}
-              to="/contact"
+              to="/company-form"
               rounded={"full"}
               bg={"gray.500"}
               color={"white"}

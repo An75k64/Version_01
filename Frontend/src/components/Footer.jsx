@@ -116,25 +116,22 @@ export default function Footer() {
               <Text fontWeight="bold" as={Link} to="/employer">
                 Employer
               </Text>
-              <Text fontWeight="bold" as={Link} to="/college">
-                College
-              </Text>
+              
             </Stack>
           </Stack>
           <Stack spacing={4}>
+            <Text fontWeight="bold" as={Link} to="/college">
+                College
+              </Text>
             <Text fontWeight="bold" as={Link} to="/campus-to-cubicle">
               Campus to Cubicle
             </Text>
             <Stack spacing={4}>
-              <Text fontWeight="bold" as={Link} to="/affiliate">
-                Affiliate
-              </Text>
+              
               <Text fontWeight="bold" as={Link} to="/contact">
                 Contact Us
               </Text>
-               <Text fontWeight="bold" as={Link} to="/login">
-                Sign In
-              </Text>
+               
             </Stack>
           </Stack>
         </SimpleGrid>
