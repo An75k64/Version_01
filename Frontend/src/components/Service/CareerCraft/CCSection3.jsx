@@ -4,19 +4,13 @@ import { Container, Stack, Heading, Box, Text, useBreakpointValue } from "@chakr
 const CCSection3 = () => {
   const cardData = [
     {
-<<<<<<< HEAD
+
       title: "1:1 Mentorship",
       imageUrl:
         "https://images.unsplash.com/photo-1513258496099-48168024aec0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bWVudG9yc2hpcHxlbnwwfHwwfHx8MA%3D%3D",
       description:
         "TalentConnect provides regular sessions, mentees can gain valuable insights, overcome challenges, and accelerate their progress in their personal or professional journey.",
-=======
-      title: "1:1 Mentorship Program",
-      imageUrl:
-        "https://images.unsplash.com/photo-1653669486900-fd06730dcc78?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      description:
-        "Advance your career with personalized guidance from industry experts. Our 1:1 mentorship program is tailored to your goals, offering targeted support in high-demand technical skills and certification pathways. Achieve your potential with expert insights and strategies for success",
->>>>>>> 4a616aa76f736981ad06cf2502bc1675c0284b9f
+
     },
     {
       title: "Skill Enhancement",

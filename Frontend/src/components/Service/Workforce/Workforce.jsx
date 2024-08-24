@@ -12,12 +12,7 @@ import {
 import Section3 from "./Section3";
 import Section4 from "./Section4";
 
-<<<<<<< HEAD
-=======
 
-
-
->>>>>>> 4a616aa76f736981ad06cf2502bc1675c0284b9f
 export default function OnCampus() {
   return (
     <>
@@ -141,8 +136,7 @@ export default function OnCampus() {
           </Stack>
         </VStack>
       </Flex>
-<<<<<<< HEAD
-=======
+
     
       {/*EmployerBranding */}
       <Flex
@@ -185,7 +179,7 @@ export default function OnCampus() {
         </VStack>
       </Flex>
        
->>>>>>> 4a616aa76f736981ad06cf2502bc1675c0284b9f
+
 
       {/* Section 3 */}
       <Section3 />
