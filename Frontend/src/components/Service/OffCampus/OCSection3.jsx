@@ -24,6 +24,7 @@ const OCSection3 = () => {
       description:
         "Talentconnect offers seamless virtual interview capabilities, allowing job seekers to connect with employers from the comfort of their own homes.",
     },
+<<<<<<< HEAD
     // {
     //   title: "Employer Branding",
     //   imageUrl:
@@ -33,6 +34,9 @@ const OCSection3 = () => {
     // },
 
 
+=======
+    
+>>>>>>> 4a616aa76f736981ad06cf2502bc1675c0284b9f
   ];
 
   return (

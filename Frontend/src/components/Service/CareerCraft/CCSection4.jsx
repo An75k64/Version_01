@@ -13,6 +13,9 @@ import {
 import { Link as RouterLink } from "react-router-dom";
 import section4Image from "../../../assets/images/OnCampus/section4.png"; // Adjust the path as needed
 
+const phoneNumber = '7564974126';
+const whatsappLink = `https://wa.me/${phoneNumber}`;
+
 const CCSection4 = () => {
   return (
     <Stack minH={"100vh"} direction={{ base: "column", md: "row" }} mt={10}>
@@ -52,8 +55,8 @@ const CCSection4 = () => {
           
           <Stack direction={{ base: "column", md: "row" }} spacing={4} mt={4}>
             <Button
-              as={RouterLink}
-              to="/contact"
+              as={Link}
+              href={whatsappLink}
               rounded={"full"}
               bg={"gray.500"}
               color={"white"}

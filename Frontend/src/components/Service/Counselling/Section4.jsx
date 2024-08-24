@@ -14,6 +14,7 @@ import { Link as RouterLink } from "react-router-dom";
 import section4Image from "../../../assets/images/OnCampus/section4.png"; // Adjust the path as needed
 
 const Section4 = () => {
+  
   return (
     <Stack minH={"100vh"} direction={{ base: "column", md: "row" }} mt={10}>
       <Flex flex={1} align={"center"} justify={"center"}>

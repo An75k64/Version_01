@@ -8,8 +8,8 @@ function EmployerInfo() {
   return (
   <>
   <Section1/>
-  <Section3/>
   <Section2/>
+  <Section3/>
   <Section4/>
   </>
   )
