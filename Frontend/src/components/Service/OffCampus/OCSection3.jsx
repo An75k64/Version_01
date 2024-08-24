@@ -24,7 +24,19 @@ const OCSection3 = () => {
       description:
         "Talentconnect offers seamless virtual interview capabilities, allowing job seekers to connect with employers from the comfort of their own homes.",
     },
+<<<<<<< HEAD
+    // {
+    //   title: "Employer Branding",
+    //   imageUrl:
+    //     "https://www.jobsoid.com/wp-content/uploads/2020/01/Employer-Branding.svg",
+    //   description:
+    //     "We help companies strengthen their employer brand and reach passive job seekers through strategic digital and social media campaigns.",
+    // },
+
+
+=======
     
+>>>>>>> 4a616aa76f736981ad06cf2502bc1675c0284b9f
   ];
 
   return (

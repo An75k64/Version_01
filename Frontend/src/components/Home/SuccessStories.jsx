@@ -9,7 +9,23 @@ import {
   Container,
   Avatar,
   useColorModeValue,
+  keyframes,
 } from "@chakra-ui/react";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+const glowingAnimation = keyframes`
+  0% {
+    box-shadow: 0 0 5px #7877e6, 0 0 10px #7877e6, 0 0 20px #7877e6, 0 0 40px #7877e6;
+  }
+  50% {
+    box-shadow: 0 0 20px #7877e6, 0 0 40px #7877e6, 0 0 60px #7877e6, 0 0 80px #7877e6;
+  }
+  100% {
+    box-shadow: 0 0 5px #7877e6, 0 0 10px #7877e6, 0 0 20px #7877e6, 0 0 40px #7877e6;
+  }
+`;
 
 const Testimonial = ({ children }) => {
   return <Box>{children}</Box>;
@@ -17,7 +33,7 @@ const Testimonial = ({ children }) => {
 
 const TestimonialContent = ({ children }) => {
   return (
-    <Stack
+    <Box
       bg={useColorModeValue("white", "gray.800")}
       boxShadow={"lg"}
       p={8}
@@ -32,30 +48,33 @@ const TestimonialContent = ({ children }) => {
         borderLeftWidth: 16,
         borderRight: "solid transparent",
         borderRightWidth: 16,
-        borderTop: "solid",
-        borderTopWidth: 16,
-        borderTopColor: useColorModeValue("white", "gray.800"),
+        borderBottom: "solid",
+        borderBottomWidth: 16,
+        borderBottomColor: useColorModeValue("white", "gray.800"),
         pos: "absolute",
-        bottom: "-16px",
+        top: "-16px",
         left: "50%",
         transform: "translateX(-50%)",
       }}
-      _hover={{
-        transform: "translateY(-10px)",
-        transition: "transform 0.3s ease-in-out",
-        boxShadow: "xl",
-      }}
       minH={"250px"}
-      maxW={"300px"}
+      maxW={"350px"}
+      textAlign={"center"}
+      transform="translateY(50px)" // Move the card part down
+      transition="transform 0.3s ease-in-out"
+      _hover={{
+        transform: "translateY(30px)",
+        transition: "transform 0.3s ease-in-out",
+        boxShadow: "0px 20px 40px rgba(0,0,0,0.2)",
+      }}
     >
       {children}
-    </Stack>
+    </Box>
   );
 };
 
 const TestimonialHeading = ({ children }) => {
   return (
-    <Heading as={"h3"} fontSize={"xl"} textAlign={"center"}>
+    <Heading as={"h3"} fontSize={"xl"} textAlign={"center"} color={"#7877e6"}>
       {children}
     </Heading>
   );
@@ -75,10 +94,30 @@ const TestimonialText = ({ children }) => {
 
 const TestimonialAvatar = ({ src, name, title }) => {
   return (
-    <Flex align={"center"} mt={8} direction={"column"}>
-      <Avatar src={src} mb={2} />
+    <Flex
+      align={"center"}
+      mb={-10}
+      mt={14}
+      direction={"column"}
+      transform="translateY(-50px)"
+      transition="transform 0.3s ease-in-out"
+      // _hover={{
+      //   transform: "translateY(-70px)",
+      //   animation: `${glowingAnimation} 1.5s infinite`,
+      // }}
+    >
+      <Avatar
+        src={src}
+        mb={2}
+        size="xl"
+        borderWidth={4}
+        borderColor={"white"}
+        boxShadow="0px 10px 20px rgba(0,0,0,0.15)"
+      />
       <Stack spacing={-1} align={"center"}>
-        <Text fontWeight={600}>{name}</Text>
+        <Text fontWeight={600} fontSize={"lg"}>
+          {name}
+        </Text>
         <Text fontSize={"sm"} color={useColorModeValue("gray.600", "gray.400")}>
           {title}
         </Text>
@@ -87,24 +126,58 @@ const TestimonialAvatar = ({ src, name, title }) => {
   );
 };
 
-export default function SuccessStories() {
+export default function PlacedStudents() {
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    pauseOnHover: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+
   return (
-    <Box bg={useColorModeValue("#f4f4f3ff", "gray.700")}>
+    <Box
+      bg={useColorModeValue("#f4f4f3ff", "gray.700")}
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+    >
       <Container maxW={"7xl"} py={16} as={Stack} spacing={12}>
         <Stack spacing={0} align={"center"}>
-          <Heading color={"#7877e6ff"}>Success Stories</Heading>
+          <Heading color={"#7877e6ff"}>Placed Students</Heading>
           <Text color={"gray.600"} textAlign={"center"} p={5}>
-            Explore our impressive portfolio of successful career transitions
-            and workforce solutions that speak volumes about our expertise.
+            Meet our students who have successfully transitioned into their
+            desired careers with our guidance.
           </Text>
         </Stack>
-        <Stack
-          direction={{ base: "column", md: "row" }}
-          spacing={{ base: 10, md: 4, lg: 10 }}
-          align={"center"}
-          justify={"center"}
-        >
+        <Slider {...settings}>
           <Testimonial>
+            <TestimonialAvatar
+              src={
+                "https://images.unsplash.com/photo-1595152772835-219674b2a8a6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDEwfHxwcm9mZXNzaW9uYWx8ZW58MHx8fHwxNjI5NTIxNzY0&ixlib=rb-1.2.1&q=80&w=400"
+              }
+              name={"Alex Johnson"}
+              title={"Software Engineer at TechCorp"}
+            />
             <TestimonialContent>
               <TestimonialHeading>
                 Seamless Career Transition
@@ -115,15 +188,15 @@ export default function SuccessStories() {
                 in securing my dream job.
               </TestimonialText>
             </TestimonialContent>
+          </Testimonial>
+          <Testimonial>
             <TestimonialAvatar
               src={
                 "https://images.unsplash.com/photo-1595152772835-219674b2a8a6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDEwfHxwcm9mZXNzaW9uYWx8ZW58MHx8fHwxNjI5NTIxNzY0&ixlib=rb-1.2.1&q=80&w=400"
               }
-              name={"Alex Johnson"}
-              title={"Software Engineer at TechCorp"}
+              name={"Emily Davis"}
+              title={"Marketing Specialist at CreativeWorks"}
             />
-          </Testimonial>
-          <Testimonial>
             <TestimonialContent>
               <TestimonialHeading>Outstanding Support</TestimonialHeading>
               <TestimonialText>
@@ -132,15 +205,15 @@ export default function SuccessStories() {
                 employers in my field.
               </TestimonialText>
             </TestimonialContent>
+          </Testimonial>
+          <Testimonial>
             <TestimonialAvatar
               src={
                 "https://images.unsplash.com/photo-1595152772835-219674b2a8a6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDEwfHxwcm9mZXNzaW9uYWx8ZW58MHx8fHwxNjI5NTIxNzY0&ixlib=rb-1.2.1&q=80&w=400"
               }
-              name={"Emily Davis"}
-              title={"Marketing Specialist at CreativeWorks"}
+              name={"Michael Brown"}
+              title={"HR Manager at Innovate Inc."}
             />
-          </Testimonial>
-          <Testimonial>
             <TestimonialContent>
               <TestimonialHeading>
                 Exceptional Recruitment Solutions
@@ -151,15 +224,8 @@ export default function SuccessStories() {
                 with our company culture.
               </TestimonialText>
             </TestimonialContent>
-            <TestimonialAvatar
-              src={
-                "https://images.unsplash.com/photo-1595152772835-219674b2a8a6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDEwfHxwcm9mZXNzaW9uYWx8ZW58MHx8fHwxNjI5NTIxNzY0&ixlib=rb-1.2.1&q=80&w=400"
-              }
-              name={"Michael Brown"}
-              title={"HR Manager at Innovate Inc."}
-            />
           </Testimonial>
-        </Stack>
+        </Slider>
       </Container>
     </Box>
   );

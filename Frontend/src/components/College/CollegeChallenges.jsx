@@ -7,7 +7,7 @@ const Feature = ({ title, text, icon }) => {
     <Stack
       align="center"
       transition="transform 0.3s, box-shadow 0.3s"
-      _hover={{ transform: "scale(1.05)", boxShadow: "lg" }}
+      _hover={{ transform: "scale(1.05)", boxShadow: "lg",}}
       p={5}
       borderRadius="md"
       bg="white"
@@ -20,8 +20,13 @@ const Feature = ({ title, text, icon }) => {
         justify={"center"}
         color={"white"}
         rounded={"full"}
-        bg={"blue.400"}
+        bg={"blue.500"}
         mb={1}
+        transition="all 0.3s ease"
+        _hover={{
+          bg: "blue.300",
+          transform: "scale(1.2)",
+        }}
       >
         {icon}
       </Flex>

@@ -6,7 +6,11 @@ import WhyChooseTalentConnect from "../components/Home/WhyChooseTalentConnect.js
 import OurServices from "../components/Home/OurService.jsx";
 import SuccessStories from "../components/Home/SuccessStories.jsx";
 import ReadyToTransform from "../components/Home/ReadyToTransform.jsx";
+<<<<<<< HEAD
+import Placed from "../components/Home/Placed.jsx";
+=======
 import Companies from "../components/Home/Companies.jsx";
+>>>>>>> 4a616aa76f736981ad06cf2502bc1675c0284b9f
 
 const Home = () => {
   return (
@@ -17,7 +21,11 @@ const Home = () => {
       <WhyChooseTalentConnect />
       <OurServices />
       <SuccessStories />
+<<<<<<< HEAD
+      <Placed/>
+=======
       <Companies />
+>>>>>>> 4a616aa76f736981ad06cf2502bc1675c0284b9f
       <ReadyToTransform />
       {/* Your other page components or routes can go here */}
     </>
