@@ -1,3 +1,4 @@
+const mongoose = require("mongoose"); // Import mongoose
 const Company = require("../models/Company"); // Import the company model
 const { validationResult } = require("express-validator");
 
@@ -70,9 +71,43 @@ const getcompanyFormById = async (req, res) => {
   }
 };
 
+/// Controller function to handle deleting company forms by IDs
+const deleteCompanyForm = async (req, res) => {
+  const { ids } = req.body;
+
+  // Log the incoming request body to debug
+  console.log("Request body received:", req.body);
+
+  // Check if ids are provided and if they are in array format
+  if (!ids || !Array.isArray(ids)) {
+    return res.status(400).json({
+      error: "Invalid request: 'ids' is required and should be an array",
+    });
+  }
+
+  try {
+    // Convert ids to ObjectId if they are valid MongoDB ObjectIds
+    const objectIds = ids.map((id) => new mongoose.Types.ObjectId(id));
+
+    // Delete the colleges matching the provided ids
+    const result = await Company.deleteMany({ _id: { $in: objectIds } });
+
+    // Check if any documents were deleted
+    if (result.deletedCount === 0) {
+      return res.status(404).send("No company forms found with the given IDs");
+    }
+
+    res.status(200).send("Company forms deleted successfully");
+  } catch (error) {
+    console.error("Error deleting company forms:", error);
+    res.status(500).send("Error deleting company forms");
+  }
+};
+
 // Export the controller functions to be used in routes
 module.exports = {
   submitCompanyForm,
   getCompanyForms,
   getcompanyFormById,
+  deleteCompanyForm,
 };

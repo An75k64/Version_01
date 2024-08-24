@@ -11,6 +11,7 @@ const companyRouter = require("./routes/companyRoutes");
 const contactRouter = require("./routes/contactRoutes");
 const affiliateRoutes = require("./routes/affiliateRoutes");
 const jobApplicationRoutes = require('./routes/jobApplicationRoutes');
+const studentRoutes = require("./routes/studentRoutes");
 
 
 
@@ -32,11 +33,14 @@ mongoose
     console.log("Error connecting to MongoDB:", error.message);
   });
 
+// Serve static files from the 'uploads' directory
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
 // Use the resume router
 app.use("/api/resumes", resumeRouter);
 
 // Use the College Form Router
-app.use("/api/colleges", collegeRouter);
+app.use("/api/college", collegeRouter);
 
 // Use the Company Form Router
 app.use("/api/company", companyRouter);
@@ -49,6 +53,9 @@ app.use("/api", affiliateRoutes);
 
 //use the job router
 app.use("/api", jobApplicationRoutes);
+
+//use the student panel for ADMIN
+app.use("/api", studentRoutes);
 
 // cards api starts
 const CardSchema = new mongoose.Schema({

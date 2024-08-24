@@ -31,7 +31,7 @@ const validationSchema = Yup.object({
   collegeEmail: Yup.string().email('Invalid email address').required('College Email is required'),
   mobileNumber: Yup.string().required('Mobile Number is required').matches(/^[0-9]{10}$/, 'Mobile Number must be exactly 10 digits'),
   placementSeason: Yup.string().required('Placement Season Duration is required'),
-  studentEngagements: Yup.string().required('Upcoming Student Engagements are required'),
+  upcomingEvents: Yup.string().required('Upcoming Student Engagements are required'),
   partnershipInterests: Yup.array().min(1, 'At least one Partnership Interests must be selected'),
 });
 
@@ -51,13 +51,13 @@ const CollegeForm = () => {
       collegeEmail: '',
       mobileNumber: '',
       placementSeason: '',
-      studentEngagements: '',
+      upcomingEvents: '',
       partnershipInterests: []
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
       try {
-        const response = await axios.post('http://localhost:5000/api/colleges/submit-college-form', values);
+        const response = await axios.post('http://localhost:5000/api/college/submit-college-form', values);
         toast({
           title: "College details submitted.",
           description: response.data,
@@ -187,6 +187,7 @@ const CollegeForm = () => {
                     <Checkbox value="ITI in Fitter">ITI in Fitter</Checkbox>
                     <Checkbox value="ITI in Welding">ITI in Welding</Checkbox>
                     <Checkbox value="ITI in Electronics">ITI in Electronics</Checkbox>
+                    <Checkbox value="No Courses Offered">No Courses Offered</Checkbox>
                   </Stack>
                 </CheckboxGroup>
                 <Text color="red.500" fontSize="sm">{formik.errors.polytechnicCourses}</Text>
@@ -213,6 +214,7 @@ const CollegeForm = () => {
                   <Checkbox value="PUC Commerce combinations">PUC Commerce combinations</Checkbox>
                   <Checkbox value="B.Pharma">B.Pharma</Checkbox>
                   <Checkbox value="D.Pharma">D.Pharma</Checkbox>
+                  <Checkbox value="No Courses Offered">No Courses Offered</Checkbox>
                 </Stack>
               </CheckboxGroup>
               <Text color="red.500" fontSize="sm">{formik.errors.ugCourses}</Text>
@@ -234,6 +236,7 @@ const CollegeForm = () => {
                   <Checkbox value="MSc">MSc</Checkbox>
                   <Checkbox value="MCom">MCom</Checkbox>
                   <Checkbox value="M.Pharma">M.Pharma</Checkbox>
+                  <Checkbox value="No Courses Offered">No Courses Offered</Checkbox>
                 </Stack>
               </CheckboxGroup>
               <Text color="red.500" fontSize="sm">{formik.errors.pgCourses}</Text>
@@ -328,15 +331,15 @@ const CollegeForm = () => {
             </FormControl>
 
             {/* Upcoming Student Engagements */}
-            <FormControl isInvalid={formik.touched.studentEngagements && formik.errors.studentEngagements}>
+            <FormControl isInvalid={formik.touched.upcomingEvents && formik.errors.upcomingEvents}>
               <FormLabel fontWeight="bold">Upcoming Student Engagements</FormLabel>
               <Textarea
-                name="studentEngagements"
-                value={formik.values.studentEngagements}
+                name="upcomingEvents"
+                value={formik.values.upcomingEvents} 
                 onChange={formik.handleChange}
                 placeholder="E.g: Job Fairs, Recruiter Sessions, Networking Events etc"
               />
-              <Text color="red.500" fontSize="sm">{formik.errors.studentEngagements}</Text>
+              <Text color="red.500" fontSize="sm">{formik.errors.upcomingEvents}</Text>
             </FormControl>
 
            {/* Partnership Interests */}

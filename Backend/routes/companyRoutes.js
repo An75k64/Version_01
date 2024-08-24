@@ -36,4 +36,7 @@ router.get("/company-forms", companyController.getCompanyForms);
 //Route to fetch a single company form by ID
 router.get("/company-form/:id", companyController.getcompanyFormById);
 
+//Route to delete the college form 
+router.delete("/delete", companyController.deleteCompanyForm);
+
 module.exports = router;

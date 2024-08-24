@@ -11,7 +11,7 @@ function Card(props) {
         <div className={styles.card}>
             <div className={styles.imgc}>
                 <img className={styles.img} src='https://i.postimg.cc/P5Bwd7d1/logo-01.png'></img>
-                <button className={styles.jdes}>Job description</button>
+               
             </div>
             <h2 className={styles.head}>{props.title}</h2>
             <div className={styles.dec}>

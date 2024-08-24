@@ -258,6 +258,8 @@ export default function PostResume() {
                         bg={"gray.100"}
                         border={0}
                         color={"gray.500"}
+                        maxLength={10} // Ensures only 10 characters can be entered
+                        pattern="\d*" // Ensures only digits can be entered
                         _placeholder={{
                           color: "gray.500",
                         }}
