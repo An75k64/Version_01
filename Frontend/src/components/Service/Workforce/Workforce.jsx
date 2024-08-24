@@ -12,10 +12,7 @@ import {
 import Section3 from "./Section3";
 import Section4 from "./Section4";
 
-
-
 export default function OnCampus() {
-   
   return (
     <>
       {/* Section 1 */}
@@ -48,10 +45,10 @@ export default function OnCampus() {
               maxW="lg"
             >
               <Heading fontFamily={"ClashDisplay"} fontSize={{ base: "4xl", md: "5xl" }} fontWeight="bold" color="blue.400">
-              Elevate Your Talent Acquisition: Premier Workforce Solutions
+                Elevate Your Talent Acquisition: Premier Workforce Solutions
               </Heading>
               <Text mt={4} fontSize={{ base: "md", md: "lg" }} color="gray.800">
-              Discover top-tier workforce solutions designed to streamline your hiring process and connect you with exceptional talent. Our services offer customized recruitment strategies, candidate screening, and talent management to help you build a skilled and dynamic team that drives your organization’s success.
+                Discover top-tier workforce solutions designed to streamline your hiring process and connect you with exceptional talent. Our services offer customized recruitment strategies, candidate screening, and talent management to help you build a skilled and dynamic team that drives your organization’s success.
               </Text>
             </Box>
           </Stack>
@@ -68,7 +65,7 @@ export default function OnCampus() {
         }
         backgroundSize={"cover"}
         backgroundPosition={"center center"}
-        backgroundAttachment={"fixed"} // This makes the background image stay in place
+        backgroundAttachment={"fixed"}
         zIndex={1}
         position="relative"
       >
@@ -78,7 +75,7 @@ export default function OnCampus() {
           px={useBreakpointValue({ base: 4, md: 8 })}
           bgGradient={"linear(to-r, transparent, blackAlpha.600)"}
         >
-          <Stack maxW={"2xl"} spacing={6} position="absolute" left="8" >
+          <Stack maxW={"2xl"} spacing={6} position="absolute" left="8">
             <Box
               bg="gray.100"
               p={10}
@@ -86,26 +83,64 @@ export default function OnCampus() {
               textAlign="left"
               color="black"
               maxW="lg"
-              minH="500px" // Increase the height of the box
+              minH="500px"
             >
               <Heading fontFamily={"ClashDisplay"} fontSize={{ base: "2xl", md: "5xl" }} fontWeight="bold" color="blue.400">
                 Why Should You Choose Us?
               </Heading>
               <Text mt={4} fontSize={{ base: "1x1", md: "2x1" }} color="gray.800">
-              When you partner with us for your workforce needs, you benefit from our commitment to delivering tailored recruitment strategies that align with your organization’s unique requirements. We understand that each company is different, and we customize our approach to ensure we connect you with the talent that fits seamlessly into your company’s culture and job specifications.
-              Choosing us means opting for a partner dedicated to not only meeting your immediate hiring needs but also contributing to your long-term success and growth.
+                When you partner with us for your workforce needs, you benefit from our commitment to delivering tailored recruitment strategies that align with your organization’s unique requirements. We understand that each company is different, and we customize our approach to ensure we connect you with the talent that fits seamlessly into your company’s culture and job specifications. Choosing us means opting for a partner dedicated to not only meeting your immediate hiring needs but also contributing to your long-term success and growth.
               </Text>
             </Box>
           </Stack>
         </VStack>
       </Flex>
-    
+
+      {/* New Section - Employer Branding */}
+      <Flex
+        mt={135}
+        w={"full"}
+        h={"70vh"}
+        backgroundImage={
+          'url(https://www.jobsoid.com/wp-content/uploads/2020/01/Employer-Branding.svg)'
+        }
+        backgroundSize={"cover"}
+        backgroundPosition={"center center"}
+        backgroundAttachment={"fixed"}
+        zIndex={1}
+        position="relative"
+      >
+        <VStack
+          w={"full"}
+          justify={"center"}
+          px={useBreakpointValue({ base: 4, md: 8 })}
+          bgGradient={"linear(to-r, blackAlpha.600, transparent)"}
+        >
+          <Stack maxW={"2xl"} spacing={6} position="absolute" right="8" bottom="35">
+            <Box
+              bg="rgba(245, 245, 245, 0.9)"
+              p={10}
+              borderRadius="md"
+              textAlign="left"
+              color="black"
+              maxW="lg"
+            >
+              <Heading fontFamily={"ClashDisplay"} fontSize={{ base: "3xl", md: "4xl" }} fontWeight="bold" color="blue.400">
+                Strengthen Your Employer Brand
+              </Heading>
+              <Text mt={4} fontSize={{ base: "md", md: "lg" }} color="gray.800">
+                Build a compelling employer brand that attracts top talent and fosters a positive work environment. Our strategies help you communicate your company’s values, culture, and unique benefits to potential candidates, enhancing your reputation as an employer of choice.
+              </Text>
+            </Box>
+          </Stack>
+        </VStack>
+      </Flex>
 
       {/* Section 3 */}
-        <Section3 />
+      <Section3 />
 
       {/* Section 4 */}
-        <Section4 />
+      <Section4 />
     </>
   );
 }

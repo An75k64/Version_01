@@ -24,13 +24,13 @@ const Section3 = () => {
       description:
         "Ensure new hires are job-ready from the start.",
     },
-    {
-      title: "Strategic Partnerships",
-      imageUrl:
-        "https://images.unsplash.com/photo-1549923746-c502d488b3ea?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      description:
-        " Build a reliable talent pipeline through lasting educational collaborations.",
-    },
+    // {
+    //   title: "Strategic Partnerships",
+    //   imageUrl:
+    //     "https://images.unsplash.com/photo-1549923746-c502d488b3ea?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    //   description:
+    //     " Build a reliable talent pipeline through lasting educational collaborations.",
+    // },
   ];
 
   return (

@@ -1,35 +1,40 @@
-
-
 import { ReactElement } from "react";
-import { Box, SimpleGrid, Icon, Text, Stack, Flex } from "@chakra-ui/react";
+import { Box, SimpleGrid, Icon, Text, Stack, Flex, Link } from "@chakra-ui/react";
 import { FcAssistant, FcIdea, FcGraduationCap } from "react-icons/fc";
+import { Link as RouterLink } from "react-router-dom"; // Import from react-router-dom
 
-const Feature = ({ title, text, icon }) => {
+const Feature = ({ title, text, icon, link }) => {
   return (
-    <Stack align="center" 
-      transition="transform 0.3s, box-shadow 0.3s"
-      _hover={{ transform: "scale(1.05)", boxShadow: "lg" }}>
-      
-      <Flex
-        
-        w={16}
-        h={16}
-        align={"center"}
-        justify={"center"}
-        color={"white"}
-        rounded={"full"}
-        bg={"blue.400"}
-        mb={1}
+    <Link as={RouterLink} to={link} _hover={{ textDecoration: "none" }}>
+      <Stack
+        align="center"
+        transition="transform 0.3s, box-shadow 0.3s"
+        _hover={{ transform: "scale(1.05)", boxShadow: "lg" }}
       >
-        {icon}
-      </Flex>
-      <Text fontWeight={600} textAlign="center">
-        {title}
-      </Text>
-      <Text color={"gray.600"} textAlign="center">
-        {text}
-      </Text>
-    </Stack>
+        <Flex
+          w={16}
+          h={16}
+          align={"center"}
+          justify={"center"}
+          color={"white"}
+          rounded={"full"}
+          bg={"blue.400"}
+          mb={1}
+          transition="transform 0.3s ease"
+          _hover={{
+            transform: "scale(1.2)", // Scale the icon when the stack is hovered
+          }}
+        >
+          {icon}
+        </Flex>
+        <Text fontWeight={600} textAlign="center">
+          {title}
+        </Text>
+        <Text color={"gray.600"} textAlign="center">
+          {text}
+        </Text>
+      </Stack>
+    </Link>
   );
 };
 
@@ -56,20 +61,22 @@ export default function WhyChooseTalentConnect() {
       </Text>
       <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10}>
         <Feature
-          
+          icon={<Icon as={FcAssistant} w={10} h={10} />}
+          title={"Seamless Campus-to-Cubicle Programs"}
+          text={"Transition smoothly from academia to the professional world."}
+          link="/campus-to-cubicle" // path to redirect
+        />
+        <Feature
           icon={<Icon as={FcIdea} w={10} h={10} />}
           title={"Innovative Recruitment Solutions"}
           text={"Revolutionizing the way talent meets opportunity."}
+          link="/employer" // path to redirect
         />
         <Feature
           icon={<Icon as={FcGraduationCap} w={10} h={10} />}
           title={"Personalized Career Services"}
           text={"Tailored to your individual goals and aspirations."}
-        />
-        <Feature
-          icon={<Icon as={FcAssistant} w={10} h={10} />}
-          title={"Seamless Campus-to-Cubicle Programs"}
-          text={"Transition smoothly from academia to the professional world."}
+          link="/careercraft" // path to redirect
         />
       </SimpleGrid>
     </Box>

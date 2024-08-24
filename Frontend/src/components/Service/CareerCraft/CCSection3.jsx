@@ -4,9 +4,16 @@ import { Container, Stack, Heading, Box, Text, useBreakpointValue } from "@chakr
 const CCSection3 = () => {
   const cardData = [
     {
+      title: "1:1 Mentorship",
+      imageUrl:
+        "https://images.unsplash.com/photo-1513258496099-48168024aec0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bWVudG9yc2hpcHxlbnwwfHwwfHx8MA%3D%3D",
+      description:
+        "TalentConnect provides regular sessions, mentees can gain valuable insights, overcome challenges, and accelerate their progress in their personal or professional journey.",
+    },
+    {
       title: "Skill Enhancement",
       imageUrl:
-        "https://www.avanse.com/viewPagesAssets/img/skill-enhancement-loan.png",
+        "https://images.unsplash.com/photo-1613347761513-0f37baebfd20?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTMxfHxlbmdpbm5lciUyMHdvcmtpbmd8ZW58MHx8MHx8fDA%3D",
       description:
         "TalentConnect provides courses and certifications in high-demand technical skills and offers advanced certification programs for career advancement and specialization.",
     },

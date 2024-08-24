@@ -1,5 +1,3 @@
-
-
 import {
   Box,
   Button,
@@ -11,7 +9,6 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { ReactElement } from "react";
 import {
   FcBusiness,
   FcGraduationCap,
@@ -48,6 +45,11 @@ const Card = ({ heading, description, icon, link }) => {
             rounded={"full"}
             bg={useColorModeValue("gray.100", "gray.700")}
             mb={2}
+            transition="all 0.3s ease"
+            _hover={{
+              bg: "blue.400",
+              transform: "scale(1.2)",
+            }}
           >
             {icon}
           </Flex>
@@ -97,7 +99,7 @@ export default function OurServices() {
             description={
               "Our OnCampus service brings career opportunities directly to students, connecting them with top employers through campus recruitment drives and job events."
             }
-            link="/oncampus" // Link to the OnCampus page
+            link="/oncampus"
           />
           <Card
             heading={"OffCampus"}

@@ -235,7 +235,7 @@ export default function PostResume() {
                       <Input
                         {...field}
                         type="email"
-                        placeholder="Gmail ID"
+                        placeholder="Email ID"
                         bg={"gray.100"}
                         border={0}
                         color={"gray.500"}
