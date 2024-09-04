@@ -41,4 +41,7 @@ router.get("/college-form/:id", collegeController.getCollegeFormById);
 //Route to delete the college form 
 router.delete("/delete", collegeController.deleteCollegeForm);
 
+// Route for getting the count 
+router.get("/count", collegeController.Count);
+
 module.exports = router;

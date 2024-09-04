@@ -1,8 +1,14 @@
 import React from "react";
-import { Box, VStack, Link, Text, Icon } from "@chakra-ui/react";
+import { Box, VStack, Text, Icon } from "@chakra-ui/react";
+import { NavLink } from 'react-router-dom';
 import { FaTachometerAlt, FaUser, FaSchool, FaBuilding, FaBriefcase, FaPhone } from 'react-icons/fa'; // Import icons from react-icons
 
 const Sidebar = ({ isOpen, onClose }) => {
+  // Close sidebar when an item is clicked
+  const handleClick = () => {
+    onClose(); // Close sidebar
+  };
+
   return (
     <Box
       as="nav"
@@ -18,114 +24,139 @@ const Sidebar = ({ isOpen, onClose }) => {
       zIndex="1000"
     >
       <VStack align="start" spacing={4} mt={6} px={4}>
-        <Link 
-          href="/admin/dashboard" 
-          w="full" 
-          _hover={{ 
-            bg: "blue.300", 
-            color: "white",
-            textDecoration: "none",
-            transform: "scale(1.05)",  // Upscaling effect
-          }}
-          transition="all 0.3s ease"  // Smooth transition for scaling
-          p={4} 
-          borderRadius="md"
-          display="flex" 
-          alignItems="center" 
+        <NavLink 
+          to="/admin/dashboard" 
+          style={({ isActive }) => ({
+            display: 'flex',
+            alignItems: 'center',
+            width: '100%',
+            padding: '1rem',
+            borderRadius: '0.375rem',
+            backgroundColor: isActive ? '#3182ce' : 'transparent', // Change to the desired color
+            color: isActive ? 'white' : 'black',
+            textDecoration: 'none',
+            transition: 'all 0.3s ease',
+            transform: isActive ? 'scale(1.05)' : 'scale(1)'
+          })}
+          onClick={handleClick}
         >
           <Icon as={FaTachometerAlt} mr={3} />
           <Text>Dashboard</Text>
-        </Link>
-        <Link 
-          href="/admin/student" 
-          w="full" 
-          _hover={{ 
-            bg: "blue.300", 
-            color: "white",
-            textDecoration: "none",
-            transform: "scale(1.05)", 
-          }}
-          transition="all 0.3s ease"
-          p={4} 
-          borderRadius="md"
-          display="flex" 
-          alignItems="center" 
+        </NavLink>
+        <NavLink 
+          to="/admin/notification" 
+          style={({ isActive }) => ({
+            display: 'flex',
+            alignItems: 'center',
+            width: '100%',
+            padding: '1rem',
+            borderRadius: '0.375rem',
+            backgroundColor: isActive ? '#3182ce' : 'transparent', // Change to the desired color
+            color: isActive ? 'white' : 'black',
+            textDecoration: 'none',
+            transition: 'all 0.3s ease',
+            transform: isActive ? 'scale(1.05)' : 'scale(1)'
+          })}
+          onClick={handleClick}
+        >
+          <Icon as={FaTachometerAlt} mr={3} />
+          <Text>Notification</Text>
+        </NavLink>
+        <NavLink 
+          to="/admin/student" 
+          style={({ isActive }) => ({
+            display: 'flex',
+            alignItems: 'center',
+            width: '100%',
+            padding: '1rem',
+            borderRadius: '0.375rem',
+            backgroundColor: isActive ? '#3182ce' : 'transparent',
+            color: isActive ? 'white' : 'black',
+            textDecoration: 'none',
+            transition: 'all 0.3s ease',
+            transform: isActive ? 'scale(1.05)' : 'scale(1)'
+          })}
+          onClick={handleClick}
         >
           <Icon as={FaUser} mr={3} />
           <Text>Student</Text>
-        </Link>
-        <Link 
-          href="/admin/college" 
-          w="full" 
-          _hover={{ 
-            bg: "blue.300", 
-            color: "white",
-            textDecoration: "none",
-            transform: "scale(1.05)", 
-          }}
-          transition="all 0.3s ease"
-          p={4} 
-          borderRadius="md"
-          display="flex" 
-          alignItems="center" 
+        </NavLink>
+        <NavLink 
+          to="/admin/college" 
+          style={({ isActive }) => ({
+            display: 'flex',
+            alignItems: 'center',
+            width: '100%',
+            padding: '1rem',
+            borderRadius: '0.375rem',
+            backgroundColor: isActive ? '#3182ce' : 'transparent',
+            color: isActive ? 'white' : 'black',
+            textDecoration: 'none',
+            transition: 'all 0.3s ease',
+            transform: isActive ? 'scale(1.05)' : 'scale(1)'
+          })}
+          onClick={handleClick}
         >
           <Icon as={FaSchool} mr={3} />
           <Text>College</Text>
-        </Link>
-        <Link 
-          href="/admin/company" 
-          w="full" 
-          _hover={{ 
-            bg: "blue.300", 
-            color: "white",
-            textDecoration: "none",
-            transform: "scale(1.05)", 
-          }}
-          transition="all 0.3s ease"
-          p={4} 
-          borderRadius="md"
-          display="flex" 
-          alignItems="center" 
+        </NavLink>
+        <NavLink 
+          to="/admin/company" 
+          style={({ isActive }) => ({
+            display: 'flex',
+            alignItems: 'center',
+            width: '100%',
+            padding: '1rem',
+            borderRadius: '0.375rem',
+            backgroundColor: isActive ? '#3182ce' : 'transparent',
+            color: isActive ? 'white' : 'black',
+            textDecoration: 'none',
+            transition: 'all 0.3s ease',
+            transform: isActive ? 'scale(1.05)' : 'scale(1)'
+          })}
+          onClick={handleClick}
         >
           <Icon as={FaBuilding} mr={3} />
           <Text>Company</Text>
-        </Link>
-        <Link 
-          href="/admin/post-job" 
-          w="full" 
-          _hover={{ 
-            bg: "blue.300", 
-            color: "white",
-            textDecoration: "none",
-            transform: "scale(1.05)", 
-          }}
-          transition="all 0.3s ease"
-          p={4} 
-          borderRadius="md"
-          display="flex" 
-          alignItems="center" 
+        </NavLink>
+        <NavLink 
+          to="/admin/post-job" 
+          style={({ isActive }) => ({
+            display: 'flex',
+            alignItems: 'center',
+            width: '100%',
+            padding: '1rem',
+            borderRadius: '0.375rem',
+            backgroundColor: isActive ? '#3182ce' : 'transparent',
+            color: isActive ? 'white' : 'black',
+            textDecoration: 'none',
+            transition: 'all 0.3s ease',
+            transform: isActive ? 'scale(1.05)' : 'scale(1)'
+          })}
+          onClick={handleClick}
         >
           <Icon as={FaBriefcase} mr={3} />
           <Text>Post a Job</Text>
-        </Link>
-        <Link 
-          href="/admin/contact-support" 
-          w="full" 
-          _hover={{ 
-            bg: "blue.300", 
-            color: "white",
-            textDecoration: "none",
-            transform: "scale(1.05)", 
-          }}
-          transition="all 0.3s ease"
-          p={4} 
-          borderRadius="md"
-          display="flex" 
-          alignItems="center" 
+        </NavLink>
+        <NavLink 
+          to="/admin/contact-support" 
+          style={({ isActive }) => ({
+            display: 'flex',
+            alignItems: 'center',
+            width: '100%',
+            padding: '1rem',
+            borderRadius: '0.375rem',
+            backgroundColor: isActive ? '#3182ce' : 'transparent',
+            color: isActive ? 'white' : 'black',
+            textDecoration: 'none',
+            transition: 'all 0.3s ease',
+            transform: isActive ? 'scale(1.05)' : 'scale(1)'
+          })}
+          onClick={handleClick}
         >
           <Icon as={FaPhone} mr={3} />
           <Text>Contact Support</Text>
-        </Link>
+        </NavLink>
       </VStack>
     </Box>
   );

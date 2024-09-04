@@ -4,6 +4,7 @@ const {
   submitResume,
   getResumes,
   getResumeById,
+  Count,
 } = require("../controllers/resumeController");
 const { body, validationResult } = require("express-validator");
 const path = require("path");
@@ -74,5 +75,9 @@ router.get("/getResumes", getResumes);
 
 // Route to fetch a single resume by ID
 router.get("/getResume/:id", getResumeById);
+
+// Route for getting the count 
+router.get("/count", Count);
+
 
 module.exports = router;

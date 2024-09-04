@@ -90,7 +90,7 @@ const downloadResume = async (req, res) => {
   }
 };
 
-// Export student data to Excel
+// Export student data to Excel 
 const exportToExcel = async (req, res) => {
   try {
     const studentIds = req.body.ids; // array of student IDs
@@ -131,6 +131,8 @@ const exportToExcel = async (req, res) => {
     res.status(500).send("Error exporting to Excel");
   }
 };
+
+
 
 // Delete resumes by IDs
 const deleteResumes = async (req, res) => {

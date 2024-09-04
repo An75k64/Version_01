@@ -14,9 +14,11 @@
     "@chakra-ui/react": "^2.8.2",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
+    "@react-three/drei": "^9.111.3",
     "axios": "^1.7.4",
     "canvas-confetti": "^1.9.3",
     "chakra-multiselect": "^0.4.13",
+    "date-fns": "^3.6.0",
     "exceljs": "^4.4.0",
     "file-saver": "^2.0.5",
     "formik": "^2.4.6",
@@ -34,6 +36,7 @@
     "react-spring": "^9.7.4",
     "recharts": "^2.12.7",
     "slick-carousel": "^1.8.1",
+    "xlsx": "^0.18.5",
     "yup": "^1.4.0"
   },
   "devDependencies": {

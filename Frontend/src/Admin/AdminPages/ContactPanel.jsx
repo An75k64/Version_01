@@ -113,7 +113,7 @@ const ContactPanel = () => {
   useEffect(() => {
     const fetchContactData = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/contacts");
+        const response = await axios.get("http://localhost:5000/api/contact/contacts");
         setContactData(response.data);
       } catch (error) {
         console.error("Error fetching contact data:", error);
@@ -162,7 +162,7 @@ const ContactPanel = () => {
     const selectedIds = Object.keys(selectedContacts).filter(id => selectedContacts[id]);
     if (selectedIds.length > 0) {
       try {
-        await axios.delete("http://localhost:5000/api/contacts", {
+        await axios.delete("http://localhost:5000/api/contact/contacts", {
           data: { ids: selectedIds },
         });
         setContactData(prevData => prevData.filter(contact => !selectedIds.includes(contact._id)));
@@ -193,26 +193,25 @@ const ContactPanel = () => {
 
   return (
     <Box>
-      <Container maxW="9xl" py={10} mt={130}>
+      <Container maxW="9xl" py={10} mt={20}>
+         <Flex direction="column" align="center" justify="center"  mb={10}>
+            <Heading fontSize="3xl" fontFamily={"ClashDisplay"} color={"blue.400"}>
+              CONTACT DETAILS
+            </Heading>
+        </Flex>
         <Stack spacing={2}>
           <Flex align="center" justify="space-between">
-            <Heading fontSize="3xl" fontFamily={"ClashDisplay"} color={"blue.400"}>CONTACT DETAILS</Heading>
-            <Flex>
               <Input
                 placeholder="Search by name"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 w={{ base: "full", sm: "300px" }}
+                mr={2}
               />
-              <IconButton
-                icon={<MdSearch />}
-                aria-label="Search"
-                ml={2}
-              />
-            </Flex>
-          </Flex>
+            
+            
 
-          <Flex mb={4} justify="flex-end" align="center">
+          
             <Button
               colorScheme="teal"
               mr={2}
@@ -250,7 +249,7 @@ const ContactPanel = () => {
             </Button>
           </Flex>
 
-          <Table variant="striped" colorScheme="teal">
+          <Table variant="striped" colorScheme="teal" mt={8}>
             <Thead>
               <Tr>
                 <Th>

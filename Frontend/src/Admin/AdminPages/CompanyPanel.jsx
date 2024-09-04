@@ -213,12 +213,14 @@ const CompanyPanel = () => {
 
   return (
     <Box>
-      <Container maxW="9xl" py={10} mt={130}>
-        <Stack spacing={2}>
-          <Flex align="center" justify="space-between">
+      <Container maxW="9xl" py={10} mt={20}>
+        <Flex direction="column" align="center" justify="center"  mb={10}>
             <Heading fontSize="3xl" fontFamily={"ClashDisplay"} color={"blue.400"}>
               COMPANY DETAILS
             </Heading>
+        </Flex>
+        <Stack spacing={2}>
+                     
             <Flex>
               <Input
                 placeholder="Search by company name"
@@ -227,8 +229,7 @@ const CompanyPanel = () => {
                 w={{ base: "full", sm: "300px" }}
               />
               <IconButton icon={<MdSearch />} aria-label="Search" ml={2} />
-            </Flex>
-          </Flex>
+            
 
           <Flex mb={4} justify="flex-end" align="center">
             <Button
@@ -266,9 +267,10 @@ const CompanyPanel = () => {
             >
               Download PDF
             </Button>
+            </Flex>
           </Flex>
 
-          <Table variant="striped" colorScheme="teal">
+          <Table variant="striped" colorScheme="teal" mt={8}>
             <Thead>
               <Tr>
                 <Th>

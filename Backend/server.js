@@ -5,14 +5,16 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const path = require("path");
 
+// Import routes
 const resumeRouter = require("./routes/resumeRoutes");
 const collegeRouter = require("./routes/collegeRoutes");
 const companyRouter = require("./routes/companyRoutes");
 const contactRouter = require("./routes/contactRoutes");
-const affiliateRoutes = require("./routes/affiliateRoutes");
-const jobApplicationRoutes = require('./routes/jobApplicationRoutes');
+const jobApplicationRoutes = require("./routes/jobApplicationRoutes");
 const studentRoutes = require("./routes/studentRoutes");
-
+const cardRoutes = require("./routes/cardRoutes");
+const loginRoutes = require("./routes/admin");
+const notificationRoutes = require("./routes/notificationRoutes");
 
 
 const app = express();
@@ -30,53 +32,23 @@ mongoose
     console.log("Connected to MongoDB");
   })
   .catch((error) => {
-    console.log("Error connecting to MongoDB:", error.message);
+    console.error("Error connecting to MongoDB:", error.message);
   });
 
-// Serve static files from the 'uploads' directory
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-
-// Use the resume router
+// API Routes
 app.use("/api/resumes", resumeRouter);
-
-// Use the College Form Router
 app.use("/api/college", collegeRouter);
-
-// Use the Company Form Router
 app.use("/api/company", companyRouter);
+app.use("/api/contact", contactRouter);
+// Use job application routes
+app.use('/api/job-applications', jobApplicationRoutes);
+app.use("/api/students", studentRoutes);
+app.use("/api/cards", cardRoutes);
 
-//use the contact us Router
-app.use("/api",contactRouter);
+app.use("/api", loginRoutes);
 
-//use the affiliate router
-app.use("/api", affiliateRoutes);
-
-//use the job router
-app.use("/api", jobApplicationRoutes);
-
-//use the student panel for ADMIN
-app.use("/api", studentRoutes);
-
-// cards api starts
-const CardSchema = new mongoose.Schema({
-  id: String,
-  title: String,
-  location: String,
-  salary: String,
-  experience: String,
-  
-  });
-  
-  const Card = mongoose.model('Card', CardSchema);
-app.get('/api/cards', async (req, res) => {
-  try {
-    const cards = await Card.find();
-    res.json(cards);
-  } catch (error) {
-    res.status(500).send('Server Error');
-  }
-});
-//cards api ends
+// Use routes
+app.use('/api/notifications', notificationRoutes);
 
 // Default route for the root URL
 app.get("/", (req, res) => {

@@ -1,37 +1,36 @@
-// models/JobApplication.js
-const mongoose = require('mongoose');
+// models/jobApplication.js
+const mongoose = require("mongoose");
 
-const jobApplicationSchema = new mongoose.Schema({
-    fullName: {
-        type: String,
-        required: true,
-    },
-    email: {
-        type: String,
-        required: true,
-    },
-    phoneNumber: {
-        type: String,
-        required: true,
-    },
-    collegeName: {
-        type: String,
-    },
-    courseDetails: {
-        type: String,
-    },
-    lastQualification: {
-        type: String,
-    },
-    companyName: {
-        type: String,
-    },
-    currentRole:{
-        type: String,
-    },
-    currentCtc:{
-        type: String,
-    }
-}, { timestamps: true });
+const JobApplicationSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
+  phone: {
+    type: String,
+    required: true,
+  },
+  resume: {
+    type: String, // Store the path to the uploaded resume file
+    required: true,
+  },
+  jobId: {
+    type: String,
+    ref: "Card", // Assuming you have a Job model
+    required: true,
+  },
+  jobTitle: {
+    type: String,
+    required: true,
+  },
+  appliedAt: {
+    type: Date,
+    default: Date.now,
+  },
+});
 
-module.exports = mongoose.model('JobApplication', jobApplicationSchema);
+module.exports = mongoose.model("jobApplication", JobApplicationSchema);

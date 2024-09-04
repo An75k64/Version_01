@@ -1,5 +1,6 @@
 const mongoose = require("mongoose"); // Import mongoose
 const Company = require("../models/Company"); // Import the company model
+const Notification = require("../models/Notification");
 const { validationResult } = require("express-validator");
 
 // Controller function to handle company form submission
@@ -27,6 +28,11 @@ const submitCompanyForm = async (req, res) => {
     // Save the company document to the database
     await newCompany.save();
 
+    // Create a notification for the form submission
+    await Notification.create({
+      type: "Company Form Submitted",
+      message: `A new company form has been submitted by ${newCompany.companyName}.`,
+    });
     // Send a success response
     res.status(201).send("Company details submitted successfully");
   } catch (error) {
@@ -40,7 +46,7 @@ const submitCompanyForm = async (req, res) => {
 const getCompanyForms = async (req, res) => {
   try {
     // Retrieve all company documents from the database
-    const company = await Company.find();
+    const company = await Company.find().sort({ createdAt: -1 }); 
 
     // Send the company as a JSON response
     res.status(200).json(company);
@@ -104,10 +110,27 @@ const deleteCompanyForm = async (req, res) => {
   }
 };
 
+// Get the count 
+const Count = async (req, res) => {
+   try {    
+     const count = await Company.countDocuments({ });
+     res.status(200).json({count });
+   } catch (error) {
+     console.error("Error fetching the number of count:", error);
+     res
+       .status(500)
+       .json({
+         message: "Error fetching the number of count",
+         error: error.message,
+       });
+   }
+};
+
 // Export the controller functions to be used in routes
 module.exports = {
   submitCompanyForm,
   getCompanyForms,
   getcompanyFormById,
   deleteCompanyForm,
+  Count,
 };

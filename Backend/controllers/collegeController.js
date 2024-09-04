@@ -1,5 +1,6 @@
 const mongoose = require("mongoose"); // Import mongoose
 const College = require("../models/College"); // Import the College model
+const Notification = require("../models/Notification");
 const { validationResult } = require("express-validator");
 
 // Controller function to handle college form submission
@@ -26,6 +27,13 @@ const submitCollegeForm = async (req, res) => {
     });
 
     await newCollege.save();
+
+    // Create a notification for the form submission
+    await Notification.create({
+      type: "College Form Submitted",
+      message: `A new college form has been submitted by ${newCollege.collegeName}.`,
+    });
+    
     res.status(201).send("College details submitted successfully");
   } catch (error) {
     console.error("Error submitting college details:", error);
@@ -36,7 +44,7 @@ const submitCollegeForm = async (req, res) => {
 // Controller function to handle fetching all college forms
 const getCollegeForms = async (req, res) => {
   try {
-    const colleges = await College.find();
+    const colleges = await College.find().sort({ createdAt: -1 });
     res.status(200).json(colleges);
   } catch (error) {
     console.error("Error fetching college forms:", error);
@@ -95,6 +103,22 @@ const deleteCollegeForm = async (req, res) => {
   }
 };
 
+// Get the count 
+const Count = async (req, res) => {
+   try {    
+     const count = await College.countDocuments({ });
+     res.status(200).json({count });
+   } catch (error) {
+     console.error("Error fetching the number of count:", error);
+     res
+       .status(500)
+       .json({
+         message: "Error fetching the number of count",
+         error: error.message,
+       });
+   }
+};
+
 
 
 
@@ -104,4 +128,5 @@ module.exports = {
   getCollegeForms,
   getCollegeFormById,
   deleteCollegeForm,
+  Count,
 };

@@ -1,4 +1,5 @@
 const Resume = require("../models/Resume"); // Import the Resume model
+const Notification = require('../models/Notification'); // Import the Notification model
 const { validationResult } = require("express-validator");
 
 // Controller function to handle resume submission
@@ -16,11 +17,9 @@ const submitResume = async (req, res) => {
     });
 
     if (existingResume) {
-      return res
-        .status(400)
-        .json({
-          message: "A resume with this email or phone number already exists.",
-        });
+      return res.status(400).json({
+        message: "A resume with this email or phone number already exists.",
+      });
     }
 
     // Create a new resume document using data from the request
@@ -34,6 +33,12 @@ const submitResume = async (req, res) => {
     // Save the resume document to the database
     await newResume.save();
 
+    // Create a notification for the new resume submission
+    await Notification.create({
+      type: "Resume Submission",
+      message: `New resume submitted by ${req.body.name} (${req.body.email})`,
+    });
+    
     // Send a success response
     res.status(201).send("Resume uploaded successfully");
   } catch (error) {
@@ -47,7 +52,7 @@ const submitResume = async (req, res) => {
 const getResumes = async (req, res) => {
   try {
     // Retrieve all resume documents from the database
-    const resumes = await Resume.find();
+    const resumes = await Resume.find().sort({ createdAt: -1 }); 
 
     // Send the resumes as a JSON response
     res.status(200).json(resumes);
@@ -78,9 +83,27 @@ const getResumeById = async (req, res) => {
   }
 };
 
+
+// Get the count 
+const Count = async (req, res) => {
+   try {    
+     const count = await Resume.countDocuments({ });
+     res.status(200).json({count });
+   } catch (error) {
+     console.error("Error fetching the number of count:", error);
+     res
+       .status(500)
+       .json({
+         message: "Error fetching the number of count",
+         error: error.message,
+       });
+   }
+};
+
 // Export the controller functions to be used in routes
 module.exports = {
   submitResume,
   getResumes,
   getResumeById,
+  Count
 };

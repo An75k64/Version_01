@@ -215,10 +215,15 @@ const CollegePanel = () => {
 
   return (
     <Box>
-      <Container maxW="9xl" py={10} mt={130}>
+      <Container maxW="9xl" py={10} mt={20}>
+        <Flex direction="column" align="center" justify="center"  mb={10}>
+            <Heading fontSize="3xl" fontFamily={"ClashDisplay"} color={"blue.400"}>
+              COLLEGE DETAILS
+            </Heading>
+        </Flex>
         <Stack spacing={2}>
           <Flex align="center" justify="space-between">
-            <Heading fontSize="3xl" fontFamily={"ClashDisplay"} color={"blue.400"}>COLLEGE DETAILS</Heading>
+           
             <Flex>
               <Input
                 placeholder="Search by college name"
@@ -230,11 +235,8 @@ const CollegePanel = () => {
                 icon={<MdSearch />}
                 aria-label="Search"
                 ml={2}
-              />
-            </Flex>
-          </Flex>
+              />            
 
-          <Flex mb={4} justify="flex-end" align="center">
             <Button
               colorScheme="teal"
               mr={2}
@@ -270,9 +272,10 @@ const CollegePanel = () => {
             >
               Download PDF
             </Button>
+            </Flex>
           </Flex>
 
-          <Table variant="striped" colorScheme="teal">
+          <Table variant="striped" colorScheme="teal" mt={8}>
             <Thead>
               <Tr>
                 <Th>

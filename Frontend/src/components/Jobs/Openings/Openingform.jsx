@@ -1,307 +1,235 @@
-// value={searchQuery}
-// onChange={event => setSearchQuery(event.target.value)}
-import React from 'react';
-import axios from 'axios';
-import { useFormik } from 'formik';
-// import { Formik, Form, Field } from "formik";
+import React, { useState, useRef, useEffect } from 'react';
+import { Box, Heading, Text, Input, Button, Stack, Icon, VStack, HStack } from '@chakra-ui/react';
+import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import {
-  Box,
-  Button,
-  Container,
-  FormControl,
-  FormLabel,
-  Heading,
-  Input,
-  Stack,
-  Text,
-  Textarea,
-  useTheme,
-  Select,
-  useToast,
-  FormErrorMessage 
-} from '@chakra-ui/react';
+import axios from 'axios';
+import { FaGraduationCap, FaClock , FaBriefcase,FaBuilding, FaTags,  } from 'react-icons/fa';
+import { FaLocationDot } from "react-icons/fa6";
+import { IoPerson } from "react-icons/io5";
+import { RiSpeakFill } from "react-icons/ri";
 
-// Validation schema with Yup
 const validationSchema = Yup.object({
-  fullName: Yup.string().required('Full Name is required'),
-  email: Yup.string().email('Invalid email address').required('Email Address is required'),
-  phoneNumber: Yup.string().required('Phone Number is required'),
-  collegeName: Yup.lazy(role =>
-    role === 'Student' ? Yup.string().required('College Name is required') : Yup.string()
-  ),
-  courseDetails: Yup.lazy(role =>
-    role === 'Student' ? Yup.string().required('Course Details are required') : Yup.string()
-  ),
-  companyName: Yup.lazy(role =>
-    role === 'Employer' ? Yup.string().required('Company Name is required') : Yup.string()
-  ),
-  companyEmail: Yup.lazy(role =>
-    role === 'Employer' ? Yup.string().email('Invalid email address').required('Company Email Address is required') : Yup.string()
-  ),
-  companySize: Yup.lazy(role =>
-    role === 'Employer' ? Yup.string().required('Company Size is required') : Yup.string()
-  ),
+  name: Yup.string()
+    .required('Name is required')
+    .matches(/^[A-Za-z\s]+$/, 'Name should only contain letters and spaces'),
+  email: Yup.string()
+    .email('Invalid email')
+    .matches(/^[a-zA-Z0-9._%+-]+@gmail\.com$/, 'Email must be a valid Gmail address')
+    .required('Email is required'),
+  phone: Yup.string()
+    .matches(/^\d{10}$/, 'Phone number must be exactly 10 digits')
+    .required('Phone number is required'),
+  resume: Yup.mixed().required('Resume is required'),
 });
 
-const jobsForm = () => {
-  const theme = useTheme();
-  const toast = useToast();
+export default function OpeningForm({ jobId }) {
+  const [message, setMessage] = useState(null);
+  const [jobDetails, setJobDetails] = useState(null);
+  const fileInputRef = useRef();
 
-  const formik = useFormik({
-    initialValues: {
-      fullName: '',
-      email: '',
-      phoneNumber: '',
-      collegeName: '',
-      lastQualification: '',
-      companyName: '',
-      currentRole: '',
-      currentCtc: ''
-    },
-    validationSchema,
-    onSubmit: async (values) => {
-      try {
-        const response = await axios.post('http://localhost:5000/api/jobapplications', values);
-        toast({
-          title: "Application Submitted",
-          description: response.data.message || "Thank you for applying!",
-          status: "success",
-          duration: 5000,
-          isClosable: true,
-        });
-        formik.resetForm(); // Reset form fields after successful submission
-      } catch (error) {
-        toast({
-          title: "Submission Error",
-          description: error.response?.data?.message || "An error occurred. Please try again.",
-          status: "error",
-          duration: 5000,
-          isClosable: true,
-        });
+  useEffect(() => {
+    const fetchJobDetails = async () => {
+      if (!jobId) {
+        console.error("No jobId provided");
+        return;
       }
+      
+      try {
+        const response = await axios.get(`http://localhost:5000/api/cards/cards/${jobId}`);
+        setJobDetails(response.data);
+      } catch (error) {
+        console.error("Error fetching job details:", error.response ? error.response.data : error.message);
+      }
+    };
+
+    fetchJobDetails();
+  }, [jobId]);
+
+  const handleSubmit = async (values, actions) => {
+    const data = new FormData();
+    data.append('name', values.name);
+    data.append('email', values.email);
+    data.append('phone', values.phone);
+    data.append('resume', values.resume);
+    data.append('jobId', jobId);
+    data.append('jobTitle', jobDetails.title);
+
+    try {
+      await axios.post('http://localhost:5000/api/job-applications/apply', data, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+      setMessage({ text: 'Resume uploaded successfully!', type: 'success' });
+      actions.resetForm();
+      if (fileInputRef.current) fileInputRef.current.value = '';
+      setTimeout(() => setMessage(null), 3000);
+    } catch (error) {
+      setMessage({ text: 'Error uploading resume.', type: 'error' });
+      setTimeout(() => setMessage(null), 3000);
     }
-  });
+    actions.setSubmitting(false);
+  };
+
+  if (!jobDetails) {
+    return <Text>Loading job details...</Text>;
+  }
 
   return (
-    <Box>
-      {/* Hero Section with Background Animation */}
-      <Box
-        position="relative"
-        overflow="hidden"
-        py={24}
-        textAlign="center"
-        color="white"
-        bgGradient="linear(to-r, #008080, #0083B0)"
-      >
-        <Container maxW="container.lg" position="relative" zIndex={1}>
-          <Heading textColor={"blue.400"} fontFamily={"ClashDisplay"} as="h1" size="2xl" mb={4} textShadow="2px 2px 4px rgba(0, 0, 0, 0.6)">
-            Join the TalentConnect Job Program
-          </Heading>
-          <Text fontSize="xl" mb={6} textShadow="1px 1px 2px rgba(0, 0, 0, 0.5)">
-            Connect with top job opportunities available to you. Apply now -
-          </Text>
-        </Container>
-        <Box
-          position="absolute"
-          top={0}
-          left={0}
-          width="100%"
-          height="100%"
-          zIndex={0}
-          _before={{
-            content: '""',
-            position: 'absolute',
-            width: '200%',
-            height: '200%',
-            top: '-50%',
-            left: '-50%',
-            background: 'radial-gradient(circle, rgba(255, 255, 255, 0.1) 10%, transparent 20%)',
-            backgroundSize: '20px 20px',
-            animation: 'moveBg 20s linear infinite',
-          }}
-        />
-        <style>
-          {`
-            @keyframes moveBg {
-              0% {
-                transform: translate(0, 0);
-              }
-              100% {
-                transform: translate(50%, 50%);
-              }
-            }
-          `}
-        </style>
-      </Box>
+    <Formik 
+      initialValues={{ name: '', email: '', phone: '', resume: null }}
+      validationSchema={validationSchema}
+      onSubmit={handleSubmit}
+    >
+      {({ setFieldValue, isSubmitting, errors, touched }) => (
+        <Form>
+          <Stack spacing={4} bg={'white'} rounded={'xl'} p={{ base: 4, sm: 6, md: 8 }}>
+            <Heading fontSize="2xl" mb={4}>Job Description</Heading>
+            <Text fontSize="lg" mb={6}>{jobDetails.jobDescription}</Text><hr></hr>
 
-      {/* Form Section */}
-      <Box
-        p={8}
-        maxW="lg"
-        mx="auto"
-        borderWidth={1}
-        borderRadius="lg"
-        borderColor={theme.colors.blue[400]}
-        boxShadow="2xl"
-        bgGradient="linear(to-r, white, blue.50)"
-        mt={-10}
-        position="relative"
-        overflow="hidden"
-        _before={{
-          content: '""',
-          position: 'absolute',
-          top: 0,
-          right: 0,
-          bottom: 0,
-          left: 0,
-          backgroundImage: `url('https://www.transparenttextures.com/patterns/white-diamond.png')`,
-          opacity: 0.2,
-          zIndex: -1,
-        }}
-      >
-        <form onSubmit={formik.handleSubmit}>
-          <Text
-            fontSize="2xl"
-            mb={6}
-            fontWeight="bold"
-            textAlign="center"
-            color="blue.400"
-          >
-            Apply to this Job
-          </Text>
+            {/* Job Details Section */}
+            <Heading fontSize="2xl" mb={4}>Job Role</Heading>
+            <VStack align="start" spacing={2} mb={6}>
+              <HStack spacing={2}>
+                <Icon as={FaLocationDot} boxSize={5} />
+                <Text color="gray.500">Work Location:</Text>
+                <Text>{jobDetails.location}</Text>
+              </HStack>
+              <HStack spacing={2}>
+                <Icon as={FaBuilding} boxSize={5} />
+                <Text color="gray.500">Department:</Text>
+                <Text>{jobDetails.department}</Text>
+              </HStack>
+              <HStack spacing={2}>
+                <Icon as={FaTags} boxSize={5} />
+                <Text width="120px" color="gray.500">Role / Category:</Text>
+                <Text width="auto">{jobDetails.jobRole} & {jobDetails.roleCategory}</Text>
+              </HStack>
+              <HStack spacing={2}>
+                <Icon as={FaClock} boxSize={5} />
+                <Text color="gray.500">Employment type:</Text>
+                <Text>{jobDetails.employmentType}</Text>
+              </HStack>
+            </VStack>
+            <hr></hr>
 
-          <Stack spacing={4}>
-            {/* Who Are You */}
-            <FormControl isInvalid={formik.touched.role && formik.errors.role}>
-              <FormLabel>Are You?</FormLabel>
-              <Select
-                name="role"
-                placeholder="Select your role"
-                value={formik.values.role}
-                onChange={formik.handleChange}
-              >
-                <option value="Student">Student</option>
-                <option value="Employer">Working Professional</option>
-              </Select>
-              <FormErrorMessage>{formik.touched.role && formik.errors.role}</FormErrorMessage>
-            </FormControl>
+            <Heading fontSize="2xl" mb={4}>Job Requirements</Heading>
+            <VStack align="start" spacing={2} mb={6}>
+              <HStack spacing={2}>
+                <Icon as={FaBriefcase} boxSize={5} />
+                <Text color="gray.500">Experience:</Text>
+                <Text>{jobDetails.experience}</Text>
+              </HStack>
+              <HStack spacing={2}>
+                <Icon as={FaGraduationCap} boxSize={5} />
+                <Text color="gray.500">Education:</Text>
+                <Text>{jobDetails.education}</Text>
+              </HStack>
+              <HStack spacing={2}>
+                <Icon as={RiSpeakFill} boxSize={5} />
+                <Text color="gray.500">English level:</Text>
+                <Text>{jobDetails.englishLevel}</Text>
+              </HStack>
+              <HStack spacing={2}>
+                <Icon as={IoPerson} boxSize={5} />
+                <Text color="gray.500">Gender:</Text>
+                <Text>{jobDetails.gender}</Text>
+              </HStack>
+            </VStack>
 
-            {/* Full Name */}
-            <FormControl isInvalid={formik.touched.fullName && formik.errors.fullName}>
-              <FormLabel>Full Name</FormLabel>
-              <Input
-                name="fullName"
-                placeholder="Enter your full name"
-                value={formik.values.fullName}
-                onChange={formik.handleChange}
-              />
-              <FormErrorMessage>{formik.touched.fullName && formik.errors.fullName}</FormErrorMessage>
-            </FormControl>
-
-            {/* Email Address */}
-            <FormControl isInvalid={formik.touched.email && formik.errors.email}>
-              <FormLabel>Email Address</FormLabel>
-              <Input
-                name="email"
-                type="email"
-                placeholder="Enter your email address"
-                value={formik.values.email}
-                onChange={formik.handleChange}
-              />
-              <FormErrorMessage>{formik.touched.email && formik.errors.email}</FormErrorMessage>
-            </FormControl>
-
-            {/* Phone Number */}
-            <FormControl isInvalid={formik.touched.phoneNumber && formik.errors.phoneNumber}>
-              <FormLabel>Phone Number</FormLabel>
-              <Input
-                name="phoneNumber"
-                type="tel"
-                placeholder="Enter your phone number"
-                value={formik.values.phoneNumber}
-                onChange={formik.handleChange}
-              />
-              <FormErrorMessage>{formik.touched.phoneNumber && formik.errors.phoneNumber}</FormErrorMessage>
-            </FormControl>
-
-            {/* Role-Specific Fields */}
-            {formik.values.role === 'Student' && (
-              <>
-                <FormControl isInvalid={formik.touched.collegeName && formik.errors.collegeName}>
-                  <FormLabel>College Name</FormLabel>
-                  <Input
-                    name="collegeName"
-                    placeholder="Enter your college's name"
-                    value={formik.values.collegeName}
-                    onChange={formik.handleChange}
-                  />
-                  <FormErrorMessage>{formik.touched.collegeName && formik.errors.collegeName}</FormErrorMessage>
-                </FormControl>
-
-                <FormControl isInvalid={formik.touched.courseDetails && formik.errors.courseDetails}>
-                  <FormLabel>Enter your last qualification</FormLabel>
-                  <Input
-                    name="courseDetails"
-                    placeholder="Enter your qualification"
-                    value={formik.values.courseDetails}
-                    onChange={formik.handleChange}
-                  />
-                  <FormErrorMessage>{formik.touched.courseDetails && formik.errors.courseDetails}</FormErrorMessage>
-                </FormControl>
-              </>
+            {/* Form Fields */}
+            <Field name="name">
+              {({ field }) => (
+                <Input
+                  {...field}
+                  type="text"
+                  placeholder="Full Name"
+                  bg={"gray.100"}
+                  border={0}
+                  color={"gray.500"}
+                  _placeholder={{ color: "gray.500" }}
+                  size="lg"
+                />
+              )}
+            </Field>
+            {errors.name && touched.name && (
+              <Text color="red.500" textAlign="center">{errors.name}</Text>
             )}
 
-            {formik.values.role === 'Employer' && (
-              <>
-                <FormControl isInvalid={formik.touched.companyName && formik.errors.companyName}>
-                  <FormLabel>Company Name</FormLabel>
-                  <Input
-                    name="companyName"
-                    placeholder="Enter your company's name"
-                    value={formik.values.companyName}
-                    onChange={formik.handleChange}
-                  />
-                  <FormErrorMessage>{formik.touched.companyName && formik.errors.companyName}</FormErrorMessage>
-                </FormControl>
-
-                <FormControl isInvalid={formik.touched.companyEmail && formik.errors.companyEmail}>
-                  <FormLabel>Current Role</FormLabel>
-                  <Input
-                    name="currentrole"
-                    placeholder="Enter your current role"
-                    value={formik.values.currentRole}
-                    onChange={formik.handleChange}
-                  />
-                  <FormErrorMessage>{formik.touched.currentRole && formik.errors.currentRole}</FormErrorMessage>
-                </FormControl>
-
-                <FormControl isInvalid={formik.touched.companySize && formik.errors.companySize}>
-                  <FormLabel>Current CTC</FormLabel>
-                  <Input
-                    name="currentctc"
-                    placeholder="Enter your ctc"
-                    value={formik.values.currentCtc}
-                    onChange={formik.handleChange}
-                  />
-                  <FormErrorMessage>{formik.touched.currentCtc && formik.errors.currentCtc}</FormErrorMessage>
-                </FormControl>
-              </>
+            <Field name="email">
+              {({ field }) => (
+                <Input
+                  {...field}
+                  type="email"
+                  placeholder="Email Address"
+                  bg={"gray.100"}
+                  border={0}
+                  color={"gray.500"}
+                  _placeholder={{ color: "gray.500" }}
+                  size="lg"
+                />
+              )}
+            </Field>
+            {errors.email && touched.email && (
+              <Text color="red.500" textAlign="center">{errors.email}</Text>
             )}
 
-            {/* Submit Button */}
+            <Field name="phone">
+              {({ field }) => (
+                <Input
+                  {...field}
+                  type="tel"
+                  placeholder="Phone Number"
+                  bg={"gray.100"}
+                  border={0}
+                  color={"gray.500"}
+                  _placeholder={{ color: "gray.500" }}
+                  size="lg"
+                />
+              )}
+            </Field>
+            {errors.phone && touched.phone && (
+              <Text color="red.500" textAlign="center">{errors.phone}</Text>
+            )}
+
+            <Field name="resume">
+              {() => (
+                <Box>
+                  <Input
+                    type="file"
+                    accept=".pdf,.doc,.docx"
+                    onChange={(event) => setFieldValue("resume", event.currentTarget.files[0])}
+                    ref={fileInputRef}
+                    style={{
+                      padding: "8px",
+                      border: "none",
+                      borderRadius: "4px",
+                      background: "#f7fafc",
+                    }}
+                  />
+                  <Text fontSize="sm" color="gray.500" mt={2}>
+                    Upload your resume in .pdf or .docx format.
+                  </Text>
+                  {errors.resume && <Text color="red.500">{errors.resume}</Text>}
+                </Box>
+              )}
+            </Field>
+
             <Button
-              type="submit"
+              mt={4}
               colorScheme="blue"
-              isLoading={formik.isSubmitting}
+              isLoading={isSubmitting}
+              type="submit"
             >
-              Submit
+              Apply
             </Button>
-          </Stack>
-        </form>
-      </Box>
-    </Box>
-  );
-};
 
-export default jobsForm;
+            {message && (
+              <Text color={message.type === 'success' ? 'green.500' : 'red.500'} textAlign="center">
+                {message.text}
+              </Text>
+            )}
+          </Stack>
+        </Form>
+      )}
+    </Formik>
+  );
+}

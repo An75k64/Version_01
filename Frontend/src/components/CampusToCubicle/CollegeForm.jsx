@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -37,7 +37,9 @@ const validationSchema = Yup.object({
 
 const CollegeForm = () => {
   const theme = useTheme();
-  const toast = useToast();
+  const [message, setMessage] = useState(null);
+  const [messageType, setMessageType] = useState(null); // 'success' or 'error'
+
   
   const formik = useFormik({
     initialValues: {
@@ -56,24 +58,20 @@ const CollegeForm = () => {
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
-      try {
-        const response = await axios.post('http://localhost:5000/api/college/submit-college-form', values);
-        toast({
-          title: "College details submitted.",
-          description: response.data,
-          status: "success",
-          duration: 5000,
-          isClosable: true,
-        });
+       try {
+        await axios.post('http://localhost:5000/api/college/submit-college-form', values);
+        setMessage("Your college details have been submitted successfully.");
+        setMessageType('success');
+        setTimeout(() => {
+          setMessage(null);
+        }, 5000); // Hide the success message after 5 seconds
         formik.resetForm(); // Reset form fields after successful submission
       } catch (error) {
-        toast({
-          title: "An error occurred.",
-          description: error.response?.data || "Unable to submit college details.",
-          status: "error",
-          duration: 5000,
-          isClosable: true,
-        });
+        setMessage(error.response?.data || "Unable to submit college details.");
+        setMessageType('error');
+        setTimeout(() => {
+          setMessage(null);
+        }, 5000); // Hide the error message after 5 seconds
       }
     }
   });
@@ -129,6 +127,32 @@ const CollegeForm = () => {
           `}
         </style>
       </Box>
+
+      {/* Message Box */}
+      {message && (
+        <Box
+          position="fixed"
+          top="50%"
+          left="50%"
+          transform="translate(-50%, -50%)"
+          p={6}
+          maxW="sm"
+          borderWidth={1}
+          borderRadius="md"
+          borderColor={messageType === 'success' ? 'green.400' : 'red.400'}
+          bgGradient={messageType === 'success' ? "linear(to-r, white, green.50)" : "linear(to-r, white, red.50)"}
+          boxShadow="lg"
+          textAlign="center"
+          zIndex={1000}
+        >
+          <Heading size="md" color={messageType === 'success' ? 'green.600' : 'red.600'} mb={4}>
+            {messageType === 'success' ? 'Thank you!' : 'Error!'}
+          </Heading>
+          <Text color={messageType === 'success' ? 'green.600' : 'red.600'}>
+            {message}
+          </Text>
+        </Box>
+      )}
 
       {/* Form Section */}
       <Box

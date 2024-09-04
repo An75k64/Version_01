@@ -54,7 +54,7 @@ const downloadPDF = (data) => {
       { 
         content: `${student.name}-Resume`, 
         styles: { textColor: [0, 0, 255] }, // Set the text color to blue
-        link: `http://localhost:5000/api/downloadResume/${student._id}`
+        link: `http://localhost:5000/api/students/downloadResume/${student._id}`
       },
     ]),
     didDrawCell: (data) => {
@@ -114,7 +114,7 @@ const downloadExcel = async (data) => {
     const cell = worksheet.getCell(`F${index + 2}`);
     cell.value = {
       text: `${student.name}-Resume`,
-      hyperlink: `http://localhost:5000/api/downloadResume/${student._id}`
+      hyperlink: `http://localhost:5000/api/students/downloadResume/${student._id}`
     };
     cell.font = { color: { argb: 'FF0000FF' }, underline: true }; // Blue color and underline
   });
@@ -191,7 +191,7 @@ const StudentPanel = () => {
     const selectedIds = Object.keys(selectedStudents).filter(id => selectedStudents[id]);
     if (selectedIds.length > 0) {
       try {
-        await axios.post("http://localhost:5000/api/delete", { ids: selectedIds });
+        await axios.post("http://localhost:5000/api/students/delete", { ids: selectedIds });
         setStudentData(prevData => prevData.filter(student => !selectedIds.includes(student._id)));
         setSelectedStudents({});
         setSelectAllAcrossPages(false);
@@ -207,12 +207,12 @@ const StudentPanel = () => {
     const fileType = resume.resumePath.split('.').pop();
     
     setResumeType(fileType);
-    setSelectedResume(`http://localhost:5000/api/viewResume/${studentId}`);
+    setSelectedResume(`http://localhost:5000/api/students/viewResume/${studentId}`);
     onOpen();
   };
 
   const handleDownloadResume = (studentId) => {
-    window.open(`http://localhost:5000/api/downloadResume/${studentId}`, "_blank");
+    window.open(`http://localhost:5000/api/students/downloadResume/${studentId}`, "_blank");
   };
 
   const indexOfLastStudent = currentPage * studentsPerPage;
@@ -233,10 +233,15 @@ const StudentPanel = () => {
 
   return (
     <Box>
-      <Container maxW="7xl" py={10} mt={130}>
-        <Stack spacing={6}>
+      <Container maxW="7xl" py={10} mt={20}>
+        <Flex direction="column" align="center" justify="center"  mb={10}>
+            <Heading fontSize="3xl" fontFamily={"ClashDisplay"} color={"blue.400"}>
+              STUDENT DETAILS
+            </Heading>
+        </Flex>
+        <Stack spacing={2}>
           <Flex align="center" justify="space-between">
-            <Heading fontSize="3xl" fontFamily={"ClashDisplay"} color={"blue.400"}>STUDENT DETAILS</Heading>
+            
             <Flex>
               <Input
                 placeholder="Search by name"
@@ -248,11 +253,8 @@ const StudentPanel = () => {
                 icon={<MdSearch />}
                 aria-label="Search"
                 ml={2}
-              />
-            </Flex>
-          </Flex>
+              />         
 
-          <Flex mb={4} justify="flex-end" align="center">
             <Button
               colorScheme="teal"
               mr={2}
@@ -288,10 +290,10 @@ const StudentPanel = () => {
             >
               Download PDF
             </Button>
-            
+            </Flex>
           </Flex>
 
-          <Table variant="striped" colorScheme="teal">
+          <Table variant="striped" colorScheme="teal" mt={8}>
             <Thead>
               <Tr>
                 <Th>

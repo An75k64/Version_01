@@ -1,5 +1,6 @@
 // controllers/contactController.js
 const mongoose = require("mongoose"); // Import mongoose
+const Notification = require("../models/Notification");
 const Contact = require("../models/contact");
 
 exports.createContact = async (req, res) => {
@@ -7,6 +8,12 @@ exports.createContact = async (req, res) => {
     const { userType, name, email, message } = req.body;
     const newContact = new Contact({ userType, name, email, message });
     await newContact.save();
+    
+    // Create a notification for the new contact message
+    await Notification.create({
+      type: "Contact Message",
+      message: `New contact message from ${name} (${email}): ${message}`,
+    });
     res.status(201).json({ message: "Contact message saved successfully" });
   } catch (error) {
     res.status(500).json({ message: "Error saving contact message", error });
@@ -15,7 +22,7 @@ exports.createContact = async (req, res) => {
 
 exports.getAllContacts = async (req, res) => {
   try {
-    const contacts = await Contact.find();
+    const contacts = await Contact.find().sort({ createdAt: -1 }); 
     res.status(200).json(contacts);
   } catch (error) {
     res.status(500).json({ message: "Error fetching contacts", error });
@@ -63,4 +70,20 @@ exports.deleteContacts = async (req, res) => {
     console.error("Error deleting contacts:", error);
     res.status(500).send("Error deleting contacts");
   }
+};
+
+// Get the count 
+exports.Count = async (req, res) => {
+   try {    
+     const count = await Contact.countDocuments({ });
+     res.status(200).json({count });
+   } catch (error) {
+     console.error("Error fetching the number of count:", error);
+     res
+       .status(500)
+       .json({
+         message: "Error fetching the number of count",
+         error: error.message,
+       });
+   }
 };
